@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real-time wearable health monitoring dashboard with multi-signal correlation analysis and early-stage risk prediction. Advanced AI-powered health insights beyond simple threshold alerts.">
+    <title>VitalSync — Real-Time Health Monitoring & Risk Prediction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <div class="logo-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="18" stroke="url(#logoGrad)" stroke-width="2.5"/>
+                    <path d="M10 20 L16 20 L19 12 L23 28 L26 20 L30 20" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" stop-color="#00d4ff"/>
+                            <stop offset="100%" stop-color="#00ff88"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <span class="brand-name">Vital<span class="brand-accent">Sync</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#dashboard" class="nav-link active" id="nav-dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                Dashboard
+            </a>
+            <a href="#analytics" class="nav-link" id="nav-analytics">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+                Analytics
+            </a>
+            <a href="#correlation" class="nav-link" id="nav-correlation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12 L10 10 L13 14 L16 8"/></svg>
+                Correlation
+            </a>
+            <a href="#alerts" class="nav-link" id="nav-alerts">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                Alerts
+            </a>
+        </div>
+        <div class="nav-actions">
+            <button class="notification-btn" id="notification-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <span class="notification-badge" id="notification-badge">3</span>
+            </button>
+            <div class="user-avatar" id="user-avatar">
+                <span>JD</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="main-content">
+
+        <!-- Patient Header -->
+        <header class="patient-header" id="patient-header">
+            <div class="patient-info">
+                <h1>Welcome back, <span class="patient-name">John Doe</span></h1>
+                <p class="patient-subtitle">Continuous health monitoring &bull; Multi-signal correlation active</p>
+            </div>
+            <div class="device-status">
+                <div class="device-indicator">
+                    <span class="device-dot pulse-dot"></span>
+                    <span class="device-label">VitalBand Pro</span>
+                </div>
+                <span class="sync-status" id="sync-status">Connected &bull; Syncing live</span>
+                <span class="last-sync" id="last-sync">Last sync: just now</span>
+            </div>
+        </header>
+
+        <!-- ==================== LIVE VITALS SECTION ==================== -->
+        <section class="section" id="dashboard">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="live-indicator"></span>
+                    Live Vitals Monitor
+                </h2>
+                <span class="section-badge">Real-Time</span>
+            </div>
+            <div class="vitals-grid" id="vitals-grid">
+                <!-- Heart Rate -->
+                <div class="vital-card" id="card-hr" data-signal="hr">
+                    <div class="vital-card-header">
+                        <div class="vital-icon vital-icon-hr">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </div>
+                        <span class="vital-label">Heart Rate</span>
+                        <span class="vital-status vital-status-normal" id="hr-status">Normal</span>
+                    </div>
+                    <div class="vital-value-container">
+                        <span class="vital-value" id="hr-value">72</span>
+                        <span class="vital-unit">BPM</span>
+                    </div>
+                    <div class="vital-chart-mini" id="hr-chart"></div>
+                    <div class="vital-range">
+                        <span>Baseline: 60-85</span>
+                        <span class="vital-trend" id="hr-trend">↗ +2%</span>
+                    </div>
+                </div>
+
+                <!-- SpO2 -->
+                <div class="vital-card" id="card-spo2" data-signal="spo2">
+                    <div class="vital-card-header">
+                        <div class="vital-icon vital-icon-spo2">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <span class="vital-label">SpO2</span>
+                        <span class="vital-status vital-status-normal" id="spo2-status">Normal</span>
+                    </div>
+                    <div class="vital-value-container">
+                        <span class="vital-value" id="spo2-value">98</span>
+                        <span class="vital-unit">%</span>
+                    </div>
+                    <div class="vital-chart-mini" id="spo2-chart"></div>
+                    <div class="vital-range">
+                        <span>Baseline: 95-100</span>
+                        <span class="vital-trend" id="spo2-trend">→ 0%</span>
+                    </div>
+                </div>
+
+                <!-- Blood Pressure -->
+                <div class="vital-card" id="card-bp" data-signal="bp">
+                    <div class="vital-card-header">
+                        <div class="vital-icon vital-icon-bp">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        </div>
+                        <span class="vital-label">Blood Pressure</span>
+                        <span class="vital-status vital-status-normal" id="bp-status">Normal</span>
+                    </div>
+                    <div class="vital-value-container">
+                        <span class="vital-value" id="bp-value">120/80</span>
+                        <span class="vital-unit">mmHg</span>
+                    </div>
+                    <div class="vital-chart-mini" id="bp-chart"></div>
+                    <div class="vital-range">
+                        <span>Baseline: 110-130/70-85</span>
+                        <span class="vital-trend" id="bp-trend">→ 0%</span>
+                    </div>
+                </div>
+
+                <!-- Body Temperature -->
+                <div class="vital-card" id="card-temp" data-signal="temp">
+                    <div class="vital-card-header">
+                        <div class="vital-icon vital-icon-temp">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4zm-4-8c0-.55.45-1 1-1s1 .45 1 1v3h-2V5z"/></svg>
+                        </div>
+                        <span class="vital-label">Temperature</span>
+                        <span class="vital-status vital-status-normal" id="temp-status">Normal</span>
+                    </div>
+                    <div class="vital-value-container">
+                        <span class="vital-value" id="temp-value">98.6</span>
+                        <span class="vital-unit">°F</span>
+                    </div>
+                    <div class="vital-chart-mini" id="temp-chart"></div>
+                    <div class="vital-range">
+                        <span>Baseline: 97.8-99.1</span>
+                        <span class="vital-trend" id="temp-trend">→ 0%</span>
+                    </div>
+                </div>
+
+                <!-- Respiratory Rate -->
+                <div class="vital-card" id="card-rr" data-signal="rr">
+                    <div class="vital-card-header">
+                        <div class="vital-icon vital-icon-rr">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+                        </div>
+                        <span class="vital-label">Respiratory Rate</span>
+                        <span class="vital-status vital-status-normal" id="rr-status">Normal</span>
+                    </div>
+                    <div class="vital-value-container">
+                        <span class="vital-value" id="rr-value">16</span>
+                        <span class="vital-unit">br/min</span>
+                    </div>
+                    <div class="vital-chart-mini" id="rr-chart"></div>
+                    <div class="vital-range">
+                        <span>Baseline: 12-20</span>
+                        <span class="vital-trend" id="rr-trend">→ 0%</span>
+                    </div>
+                </div>
+
+                <!-- HRV -->
+                <div class="vital-card" id="card-hrv" data-signal="hrv">
+                    <div class="vital-card-header">
+                        <div class="vital-icon vital-icon-hrv">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+                        </div>
+                        <span class="vital-label">HRV</span>
+                        <span class="vital-status vital-status-normal" id="hrv-status">Normal</span>
+                    </div>
+                    <div class="vital-value-container">
+                        <span class="vital-value" id="hrv-value">42</span>
+                        <span class="vital-unit">ms</span>
+                    </div>
+                    <div class="vital-chart-mini" id="hrv-chart"></div>
+                    <div class="vital-range">
+                        <span>Baseline: 30-65</span>
+                        <span class="vital-trend" id="hrv-trend">→ 0%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MULTI-SIGNAL CORRELATION ==================== -->
+        <section class="section" id="correlation">
+            <div class="section-header">
+                <h2 class="section-title">Multi-Signal Correlation Analysis</h2>
+                <span class="section-badge">AI-Powered</span>
+            </div>
+            <div class="correlation-container">
+                <div class="correlation-matrix-wrapper">
+                    <div class="correlation-info-panel">
+                        <h3>How It Works</h3>
+                        <p>Traditional monitoring triggers alerts when a single vital crosses a threshold. Our <strong>multi-signal correlation engine</strong> analyzes relationships <em>between</em> signals to detect subtle anomalies before individual thresholds are breached.</p>
+                        <div class="correlation-legend">
+                            <div class="legend-item"><span class="legend-color" style="background: #00ff88;"></span> Strong Positive (0.7 to 1.0)</div>
+                            <div class="legend-item"><span class="legend-color" style="background: #00d4ff;"></span> Moderate (0.3 to 0.7)</div>
+                            <div class="legend-item"><span class="legend-color" style="background: #6c7293;"></span> Weak (-0.3 to 0.3)</div>
+                            <div class="legend-item"><span class="legend-color" style="background: #ffb800;"></span> Moderate Negative (-0.7 to -0.3)</div>
+                            <div class="legend-item"><span class="legend-color" style="background: #ff006e;"></span> Strong Negative (-1.0 to -0.7)</div>
+                        </div>
+                        <div class="approach-comparison">
+                            <div class="approach-card approach-old">
+                                <div class="approach-icon">✕</div>
+                                <h4>Threshold-Based (Traditional)</h4>
+                                <p>"Alert when HR &gt; 100 BPM"</p>
+                                <span class="approach-tag">Reactive</span>
+                            </div>
+                            <div class="approach-card approach-new">
+                                <div class="approach-icon">✓</div>
+                                <h4>Correlation-Based (VitalSync)</h4>
+                                <p>"HR-SpO2 divergence detected — risk pattern emerging"</p>
+                                <span class="approach-tag">Predictive</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="correlation-matrix" id="correlation-matrix">
+                        <div class="matrix-header-row" id="matrix-header-row">
+                            <div class="matrix-corner"></div>
+                            <!-- Headers injected by JS -->
+                        </div>
+                        <div class="matrix-body" id="matrix-body">
+                            <!-- Matrix cells injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== RISK PREDICTION ==================== -->
+        <section class="section" id="risk-prediction">
+            <div class="section-header">
+                <h2 class="section-title">Early-Stage Risk Prediction</h2>
+                <span class="section-badge">Predictive</span>
+            </div>
+            <div class="risk-grid" id="risk-grid">
+                <!-- Cardiovascular -->
+                <div class="risk-card" id="risk-cardio">
+                    <div class="risk-gauge-container">
+                        <canvas class="risk-gauge" id="gauge-cardio" width="160" height="160"></canvas>
+                        <div class="risk-gauge-value">
+                            <span class="risk-percent" id="risk-cardio-value">12</span>
+                            <span class="risk-percent-sign">%</span>
+                        </div>
+                    </div>
+                    <h3 class="risk-title">Cardiovascular</h3>
+                    <p class="risk-desc">Based on HR, BP, HRV correlation patterns</p>
+                    <div class="risk-factors" id="risk-cardio-factors">
+                        <span class="risk-factor">HR-BP Sync: Normal</span>
+                        <span class="risk-factor">HRV Stability: Good</span>
+                    </div>
+                    <div class="risk-trend" id="risk-cardio-trend">
+                        <span class="risk-trend-arrow trend-stable">→</span>
+                        <span>Stable for 24h</span>
+                    </div>
+                </div>
+
+                <!-- Respiratory -->
+                <div class="risk-card" id="risk-respiratory">
+                    <div class="risk-gauge-container">
+                        <canvas class="risk-gauge" id="gauge-respiratory" width="160" height="160"></canvas>
+                        <div class="risk-gauge-value">
+                            <span class="risk-percent" id="risk-respiratory-value">8</span>
+                            <span class="risk-percent-sign">%</span>
+                        </div>
+                    </div>
+                    <h3 class="risk-title">Respiratory Distress</h3>
+                    <p class="risk-desc">Based on SpO2, RR, HR cross-signal analysis</p>
+                    <div class="risk-factors" id="risk-respiratory-factors">
+                        <span class="risk-factor">SpO2-RR Sync: Normal</span>
+                        <span class="risk-factor">Breathing Pattern: Regular</span>
+                    </div>
+                    <div class="risk-trend" id="risk-respiratory-trend">
+                        <span class="risk-trend-arrow trend-stable">→</span>
+                        <span>Stable for 48h</span>
+                    </div>
+                </div>
+
+                <!-- Metabolic -->
+                <div class="risk-card" id="risk-metabolic">
+                    <div class="risk-gauge-container">
+                        <canvas class="risk-gauge" id="gauge-metabolic" width="160" height="160"></canvas>
+                        <div class="risk-gauge-value">
+                            <span class="risk-percent" id="risk-metabolic-value">15</span>
+                            <span class="risk-percent-sign">%</span>
+                        </div>
+                    </div>
+                    <h3 class="risk-title">Metabolic Syndrome</h3>
+                    <p class="risk-desc">Based on Temp, HR, BP multi-factor scoring</p>
+                    <div class="risk-factors" id="risk-metabolic-factors">
+                        <span class="risk-factor">Temp-HR Pattern: Normal</span>
+                        <span class="risk-factor">Circadian Rhythm: Aligned</span>
+                    </div>
+                    <div class="risk-trend" id="risk-metabolic-trend">
+                        <span class="risk-trend-arrow trend-stable">→</span>
+                        <span>Stable for 72h</span>
+                    </div>
+                </div>
+
+                <!-- Sleep Apnea -->
+                <div class="risk-card" id="risk-apnea">
+                    <div class="risk-gauge-container">
+                        <canvas class="risk-gauge" id="gauge-apnea" width="160" height="160"></canvas>
+                        <div class="risk-gauge-value">
+                            <span class="risk-percent" id="risk-apnea-value">6</span>
+                            <span class="risk-percent-sign">%</span>
+                        </div>
+                    </div>
+                    <h3 class="risk-title">Sleep Apnea</h3>
+                    <p class="risk-desc">Based on SpO2, RR, HRV nighttime patterns</p>
+                    <div class="risk-factors" id="risk-apnea-factors">
+                        <span class="risk-factor">Night SpO2 Dips: None</span>
+                        <span class="risk-factor">RR Irregularity: Low</span>
+                    </div>
+                    <div class="risk-trend" id="risk-apnea-trend">
+                        <span class="risk-trend-arrow trend-stable">→</span>
+                        <span>Stable for 7d</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ANOMALY TIMELINE ==================== -->
+        <section class="section" id="alerts">
+            <div class="section-header">
+                <h2 class="section-title">Anomaly Detection Timeline</h2>
+                <span class="section-badge">Pattern-Based</span>
+            </div>
+            <div class="anomaly-container">
+                <div class="anomaly-stats">
+                    <div class="anomaly-stat">
+                        <span class="anomaly-stat-value" id="anomaly-total">0</span>
+                        <span class="anomaly-stat-label">Detected Today</span>
+                    </div>
+                    <div class="anomaly-stat">
+                        <span class="anomaly-stat-value" id="anomaly-critical">0</span>
+                        <span class="anomaly-stat-label">Need Attention</span>
+                    </div>
+                    <div class="anomaly-stat">
+                        <span class="anomaly-stat-value" id="anomaly-resolved">0</span>
+                        <span class="anomaly-stat-label">Auto-Resolved</span>
+                    </div>
+                </div>
+                <div class="timeline" id="anomaly-timeline">
+                    <div class="timeline-empty" id="timeline-empty">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <p>No anomalies detected. System monitoring actively.</p>
+                    </div>
+                    <!-- Timeline items injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TREND ANALYTICS ==================== -->
+        <section class="section" id="analytics">
+            <div class="section-header">
+                <h2 class="section-title">Trend Analytics</h2>
+                <div class="time-range-selector" id="time-range-selector">
+                    <button class="time-btn active" data-range="24h">24H</button>
+                    <button class="time-btn" data-range="7d">7D</button>
+                    <button class="time-btn" data-range="30d">30D</button>
+                </div>
+            </div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Heart Rate Trend</h3>
+                    <canvas id="trend-hr" width="500" height="200"></canvas>
+                </div>
+                <div class="analytics-card">
+                    <h3>SpO2 Trend</h3>
+                    <canvas id="trend-spo2" width="500" height="200"></canvas>
+                </div>
+                <div class="analytics-card">
+                    <h3>Blood Pressure Trend</h3>
+                    <canvas id="trend-bp" width="500" height="200"></canvas>
+                </div>
+                <div class="analytics-card">
+                    <h3>HRV & Respiratory</h3>
+                    <canvas id="trend-hrv-rr" width="500" height="200"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <svg viewBox="0 0 40 40" fill="none" width="28" height="28">
+                        <circle cx="20" cy="20" r="18" stroke="url(#footerGrad)" stroke-width="2"/>
+                        <path d="M10 20 L16 20 L19 12 L23 28 L26 20 L30 20" stroke="url(#footerGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <defs>
+                            <linearGradient id="footerGrad" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#00d4ff"/>
+                                <stop offset="100%" stop-color="#00ff88"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>VitalSync v2.4</span>
+                </div>
+                <p class="footer-disclaimer">This system provides predictive health insights and is not a substitute for professional medical diagnosis. Always consult your healthcare provider for clinical decisions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Device</h4>
+                <p>VitalBand Pro — Firmware 4.2.1</p>
+                <p>Battery: <span id="device-battery">87%</span></p>
+                <p>Signal: <span id="device-signal">Excellent</span></p>
+            </div>
+            <div class="footer-section">
+                <h4>Emergency</h4>
+                <p>Primary: Dr. Sarah Chen</p>
+                <p>Phone: (555) 012-3456</p>
+                <p>Hospital: Metro General</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 VitalSync Health Technologies. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
